@@ -1,11 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dad's Jokes</title>
+  <style>
+    body {
+        background-image: url("360_F_286182066_yY72dajL2Vv9pYZ0LWiDiYZrMEStz0Fo.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        font-family: forte;
+        text-align: center;
+        padding: 50px;
+    }
+    #wrapper{
+        width: 60%;
+        height: 300px;
+        margin: 0 auto;
+        margin-top: 5rem;
+        background-color: aqua;
+        border-radius: 0.5rem;
+        box-shadow: 0.2rem 0.2rem 1rem 0.1rem white;
+    }
+    #wrapper h1{
+        padding: 1.5rem 0;
+    }
+    #joke {
+      font-size: 24px;
+      margin-bottom: 20px;
+      background-color: white;
+      padding: 2rem 0;
+      font-family: broadway;
+    }
+    #wrapper button{
+        padding: 1rem 2rem;
+        border-radius: 0.45rem;
+        border: none;
+        background-image: ;
+        color: blue;
+        font-family: "Viner Hand ITC";
+        font-weight: bolder;
+    }
+  </style>
 </head>
 <body>
-    
+    <div id="wrapper">
+        <h1>Dad's Jokes</h1>
+        <p id="joke">Click the button to get a Dad's joke.</p>
+        <button id="getJoke">Get Joke</button>
+    </div>
+
+  <script>
+    const jokeElement = document.getElementById('joke');
+    const getJokeButton = document.getElementById('getJoke');
+
+    function fetchJoke() {
+      fetch('https://api.api-ninjas.com/v1/dadjokes', {
+        headers: {
+          'X-Api-Key': 'QvckXXxbYwTBRssiKkvz9w==Fj0Q4Yzhp0JTDR8K'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          jokeElement.textContent = data[0].joke;
+        })
+        .catch(error => {
+          jokeElement.textContent = 'Error fetching joke.';
+          console.error('Error:', error);
+        });
+    }
+
+    getJokeButton.addEventListener('click', fetchJoke);
+  </script>
 </body>
 </html>
